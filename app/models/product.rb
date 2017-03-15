@@ -10,4 +10,9 @@ class Product < ActiveRecord::Base
   validates :quantity, presence: true
   validates :category, presence: true
 
+  #attr_reader included (maybe)
+  def sold_out?
+    quantity == 0
+  end
+
 end
