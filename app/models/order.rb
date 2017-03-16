@@ -7,4 +7,6 @@ class Order < ActiveRecord::Base
 
   validates :stripe_charge_id, presence: true
 
+  scope :with_products, -> { includes(line_items: [ :product ]) }
+
 end
