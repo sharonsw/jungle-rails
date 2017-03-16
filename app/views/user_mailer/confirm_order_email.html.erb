@@ -4,12 +4,16 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Thank you for your order, <%= @user.first_name %></h1>
-    <p>
-      Here is your order summary:
-    </p>
-    <p>
-      To see your order, just follow this link: <%= @url %>.
-    </p>
+    <h1>Thank you for your order</h1>
+    <section>
+      <p>Here is your order summary:</p>
+      <ul>
+        <% @order.line_items.each do |item| %>
+          <li><strong><%= item.product.name %></strong> | <%= humanized_money_with_symbol (item.product.price_cents / 100 * item.quantity) %></li>
+        <% end %>
+      </ul>
+      <p><strong>Total:</strong> <%= humanized_money_with_symbol @order.total_cents / 100 %></p>
+    </section>
+    <p>To see your order, just follow this link: <%= @url %>.</p>
   </body>
 </html>
