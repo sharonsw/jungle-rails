@@ -7,7 +7,6 @@
   <article class="product-detail">
 
     <div class="row">
-
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
@@ -26,18 +25,22 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="product-reviews col-sm-8">
+        <h2>Reviews</h2>
+          <% @product.reviews.each do |review| %>
+            <article>
+              <p><strong>User: </strong><%= review.user.first_name %></p>
+              <p><strong>Rating: </strong><%= review.rating %></p>
+              <p><strong>Review: </strong><%= review.content %></p>
+                <%= link_to 'Delete review', [review.product, review],
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+            </article>
+          <% end %> 
+      </div>
+    </div>
+
   </article>
 </section>
-<section class="product-reviews">
-  <h2>Reviews</h2>
-    <% @product.reviews.each do |review| %>
-      <article>
-        <p><strong>User: </strong><%= review.user.first_name %></p>
-        <p><strong>Rating: </strong><%= review.rating %></p>
-        <p><strong>Review: </strong><%= review.content %></p>
-          <%= link_to 'Delete review', [review.product, review],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </article>
-    <% end %> 
-</section>
+
