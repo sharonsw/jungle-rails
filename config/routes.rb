@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create, :new]
   end
 
-  resources :users, except: [:edit, :destroy, :create, :new]
+  resources :users, except: [:destroy, :create]
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 

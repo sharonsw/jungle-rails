@@ -1,5 +1,4 @@
 <section class="cart-show">
-
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
@@ -37,7 +36,7 @@
         </tfoot>
       </table>
     </div>
-
+  <% if !current_user.nil? %>
     <div class="row">
       <div class="col-xs-12">
         <%= form_tag orders_path do %>
@@ -54,6 +53,11 @@
         <% end %>
       </div>
     </div>
+  <% else %>
+    <div class="login-to-order">
+      <p>Want to place an order? Login or signup for a free account!</p>
+      <%= link_to "I already have an account", login_path %><span>|<%= link_to "Sign up for free account", signup_path %></span>
+    </div>
   <% end %>
-
+<% end %>
 </section>
