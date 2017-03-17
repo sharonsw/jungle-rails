@@ -13,8 +13,9 @@ class ReviewsController < ApplicationController
     redirect_to product_path(@product)
   end
 
+
   private
   def review_params
-    params.require(:review).permit(:rating, :content)
+    params.require(:review).permit(:rating, :content, :user_id)
   end
 end
