@@ -8,7 +8,6 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-1">
       <%= form_for [:admin, @category] do |form| %>
-        <%# Display validation errors%>
         <% if form.object.errors.any? %>
           <div class="alert alert-danger">
             <strong>The following errors prevented saving:</strong>
@@ -24,12 +23,6 @@
         <%= form.label :name %>
         <%= form.text_field :name, class: 'form-control' %>
       </div>
-
-      <div class="form-group">
-        <%= form.label :image %>
-        <%= form.file_field :image %>
-      </div>
-
       <%= form.submit 'Create Cateogry', class: 'btn btn-primary' %>
     <% end %>
     
