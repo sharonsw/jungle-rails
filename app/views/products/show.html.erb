@@ -4,8 +4,7 @@
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
   </header>
 
-  <article class="product-detail">
-
+  <section class="product-detail">
     <div class="row">
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
@@ -24,40 +23,36 @@
         </dl>
       </div>
     </div>
-
+  </section>
+  <section class="product-review">
     <div class="row">
-      <div class="product-reviews col-sm-8">
+      <div class="product-reviews-list col-sm-8">
         <h2>Reviews</h2>
-          <% @product.reviews.each do |review| %>
-            <article>
-              <p><strong>User: </strong><%= review.user.first_name %></p>
-              <p><strong>Rating: </strong><%= review.rating %></p>
-              <p><strong>Review: </strong><%= review.content %></p>
-                <%= link_to 'Delete review', [review.product, review],
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-            </article>
-          <% end %> 
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+          <% end %>
+        <%= render partial: "review", collection: @product.reviews.reverse %>
       </div>
       <div class="product-reviews-form col-sm-4">
-       <h2>Leave a Review</h2>
-       <%= form_for ([@product, @product.reviews.build]) do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <div class="form-group">
-          <%= f.label :rating %><br/>
-          <%= f.select(:rating, Review.make_rating, {class: 'form-control'}) %>
-        </div>
-        <div class="form-group">
-          <%= f.label :content %><br>
-          <%= f.text_area :content, {class: 'form-control'} %>
-        </div>
-        <p>
-          <%= f.submit class: "btn btn-primary" %>
-        </p>
-       <% end %>
+        <% if !current_user.nil? %>
+          <h2>Leave a Review</h2>
+          <%= form_for ([@product, @product.reviews.build]) do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <div class="form-group">
+              <%= f.label :rating %><br/>
+              <%= f.select(:rating, make_rating, {class: 'form-control'}) %>
+            </div>
+            <div class="form-group">
+              <%= f.label :content %><br>
+              <%= f.text_area :content, {class: 'form-control'} %>
+            </div>
+            <p>
+              <%= f.submit class: "btn btn-primary" %>
+            </p>
+          <% end %>
+        <% end %>
       </div>
     </div>
-
-  </article>
+  </section>
 </section>
 

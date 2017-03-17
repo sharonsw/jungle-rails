@@ -1,0 +1,11 @@
+<article>
+  <p><strong>User: </strong><%= review.user.first_name %></p>
+  <p><strong>Rating: </strong><%= review.rating %></p>
+  <p><strong>Review: </strong><%= review.content %></p>
+  <% if current_user == review.user %>
+    <%= link_to 'Delete review', [review.product, review],
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</article>
+

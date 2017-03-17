@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+  
   def create
     @product = Product.find(params[:product_id])
     @review = @product.reviews.create(review_params)
@@ -7,12 +7,15 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:product_id]) 
+    @product = Product.find(params[:product_id])
     @review = @product.reviews.find(params[:id]) 
-    @review.destroy #remove selected comment in database
+    if (current_user == @review.user)
+      @review.destroy 
+    else
+      flash[:danger] = "Not authorized!"
+    end
     redirect_to product_path(@product)
   end
-
 
   private
   def review_params
