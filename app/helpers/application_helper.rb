@@ -1,5 +1,4 @@
 module ApplicationHelper
-  include SessionHelper
   def make_rating
     choices = []
     (1..5).each do |rate|
