@@ -15,5 +15,20 @@ class Product < ActiveRecord::Base
   def sold_out?
     quantity == 0
   end
+  
+  #doesnt work!
+  # scope :with_ratings, -> { includes(:review) }
 
+  def self.average_rating(product_id)
+    reviews = Review.where("product_id = #{product_id}")
+    sum = 0
+    if (reviews.length > 0)
+      reviews.each do |review|
+        sum += review.rating 
+      end
+      sum / reviews.length
+    else
+      sum
+    end
+  end
 end

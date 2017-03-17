@@ -9,7 +9,7 @@
       <p>Here is your order summary:</p>
       <ul>
         <% @order.line_items.each do |item| %>
-          <li><strong><%= item.product.name %></strong> | <%= humanized_money_with_symbol (item.product.price_cents / 100 * item.quantity) %></li>
+          <li><strong><%= item.product.name %></strong> | <strong>Quantity:</strong> <%= item.quantity %> | <strong>Subtotal:</strong> <%= humanized_money_with_symbol (item.product.price_cents / 100 * item.quantity) %></li>
         <% end %>
       </ul>
       <p><strong>Total:</strong> <%= humanized_money_with_symbol @order.total_cents / 100 %></p>

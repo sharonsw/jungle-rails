@@ -6,6 +6,4 @@ class Review < ActiveRecord::Base
   validates :user, presence: true
   validates :rating, inclusion: {in: 1...6}
   validates :content, presence: true
-
-  scope :with_user, -> { includes(:user) }
 end
