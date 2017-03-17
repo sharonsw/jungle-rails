@@ -1,0 +1,39 @@
+<section class="panel panel-default items">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">Product</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_total = 0 %>
+      <% cart.each do |product_id, details| %>
+        <%= render 'item', product_id: product_id, details: details %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="4">
+          TOTAL:
+        </th>
+        <th>
+          <%= @cart_total %>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</section>
+
+<section class="checkout">
+  <% if !current_user.nil? %>
+    <%= render 'checkout' %>
+  <% else %>
+    <div class="login-to-order">
+      <p>Want to place an order? Login or signup for a free account!</p>
+      <%= link_to "I already have an account", login_path %><span> | <%= link_to "Sign up for free account", signup_path %></span>
+    </div>
+  <% end %>
+</section>
