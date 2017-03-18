@@ -11,10 +11,10 @@ class Product < ActiveRecord::Base
   validates :category, presence: true
 
   def sold_out?
-    self.quantity == 0
+    quantity == 0
   end
 
   def average_rating
-    self.reviews.average(:rating).to_f.round(1)
+    reviews.average(:rating).to_f.round(1)
   end
 end
